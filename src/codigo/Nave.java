@@ -18,14 +18,16 @@ public class Nave {
     public int y = 0;
     private boolean pulsadoIzquierda = false;
     private boolean pulsadoDerecha = false;
+    private int anchoPantalla;
 
-    public Nave() {
+    public Nave(int _anchoPantalla) {
         //Esto es le contructor de la clase nave
         try {
             imagen = ImageIO.read(getClass().getResource("/imagenes/nave.png"));
         } catch (IOException ramon) {
 
         }
+        anchoPantalla = _anchoPantalla;
     }
 
     public boolean isPulsadoIzquierda() {
@@ -47,7 +49,10 @@ public class Nave {
     //Metodo para mover a la nave 
     public void mueve() {
         if (pulsadoIzquierda && x > 0) {
-            x--;
+            x-=7        ;
+        }
+        if (pulsadoDerecha && x < anchoPantalla - imagen.getWidth(null)-8) {
+            x+=7;
         }
     }
 

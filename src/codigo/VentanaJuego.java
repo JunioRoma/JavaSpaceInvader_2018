@@ -25,7 +25,8 @@ public class VentanaJuego extends javax.swing.JFrame {
 
     BufferedImage buffer = null;
     int contador = 0;
-    Nave miNave = new Nave();
+    Nave miNave = new Nave(ANCHOPANTALLA);
+    Disparo miDisparo = new Disparo(ALTOPANTALLA);
 
     /*
     Bucle de animacion del juego 
@@ -65,6 +66,8 @@ public class VentanaJuego extends javax.swing.JFrame {
 //-------------------------------------------------------------------------------------------------------------
 //  Redibujamos cada elemento en su nueva posicion en el buffer     
 //  contador ++;
+        miDisparo.mueve();
+        g2.drawImage(miDisparo.imagen, miDisparo.getX(),miDisparo.getY(), null);
         miNave.mueve();
         g2.drawImage(miNave.imagen, miNave.x, miNave.y, null);
 
@@ -124,6 +127,10 @@ public class VentanaJuego extends javax.swing.JFrame {
             case KeyEvent.VK_RIGHT:
                 miNave.setPulsadoDerecha(true);
                 break;
+            case KeyEvent.VK_SPACE:
+                miDisparo.setDisparo(true);
+                    miDisparo.posicionDisparo(miNave);
+                break;
 
         }
 
@@ -138,7 +145,7 @@ public class VentanaJuego extends javax.swing.JFrame {
                 miNave.setPulsadoDerecha(false);
                 break;
     }//GEN-LAST:event_formKeyReleased
- }
+    }
 
     /**
      * @param args the command line arguments
